@@ -1,0 +1,59 @@
+<script lang="ts">
+  import { concat } from "../lib/utils"
+  import type { Item } from "../lib/exchange"
+  import { Inventory } from "../lib/inventory"
+
+  export let inventory: Inventory
+  export let agreed: () => void
+  export let disagreed: () => void
+
+  let offeredItem: Item | undefined = undefined // todo: сделать списком
+
+  function offerItem(itemIndex: number) {
+    const newOfferedItem = inventory[itemIndex]
+    if (!newOfferedItem) { return }
+    if (offeredItem) {
+      Inventory.setItemAt(inventory, offeredItem, itemIndex)
+    } else {
+      Inventory.removeItem(inventory, itemIndex)
+    }
+    offeredItem = newOfferedItem
+  }
+
+  let agreedState = false
+
+  function toggleAgreedState() {
+    if (agreedState) { disagreed() } else { agreed() }
+    agreedState = !agreedState
+  }
+</script>
+
+<div>
+  <div>
+    <h2>Предложение</h2>
+    {offeredItem}
+  </div>
+  <div>
+    <h2>Инвентарь</h2>
+    {#each inventory as item, itemIndex}
+      <button on:click={_ => {
+        offerItem(itemIndex)
+      }}
+      >
+        {item}
+      </button>
+    {/each}
+  </div>
+  <div>
+    <button
+      class={concat([
+        agreedState ? "bg-green-500" : "bg-gray-500"
+      ])}
+      on:click={_ => {
+        toggleAgreedState()
+      }}
+    >
+      Согласиться
+    </button>
+  </div>
+</div>
