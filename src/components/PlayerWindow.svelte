@@ -34,8 +34,15 @@
   }
 </script>
 
-<div>
-  <div>
+<div class={concat([
+  "flex",
+  "flex-col",
+  "h-full",
+  "gap-4",
+])}>
+  <div class={concat([
+    "grow"
+  ])}>
     <h2 class={concat([
       "text-xl"
     ])}>Предложение</h2>
@@ -47,7 +54,9 @@
       </button>
     {/if}
   </div>
-  <div>
+  <div class={concat([
+    "grow"
+  ])}>
     <h2 class={concat([
       "text-xl"
     ])}>Инвентарь</h2>
@@ -64,10 +73,15 @@
       {/each}
     </ul>
   </div>
-  <div>
+  <div class={concat([
+    "flex",
+    "justify-center",
+    "p-2",
+  ])}>
     <button
       class={concat([
-        agreedState ? "bg-green-500" : "bg-gray-500"
+        agreedState ? "bg-green-500" : "bg-gray-500",
+        "p-2",
       ])}
       on:click={_ => {
         toggleAgreedState()

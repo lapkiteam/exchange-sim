@@ -28,17 +28,35 @@
       "dark:text-white",
       "flex",
       "flex-col",
+      "p-2",
+      "gap-1",
     ])}>
-      <PlayerWindow
-        inventory={firstPlayer}
-        agreed={() => {}}
-        disagreed={() => {}}
-      />
-      <PlayerWindow
-        inventory={secondPlayer}
-        agreed={() => {}}
-        disagreed={() => {}}
-      />
+      <div class={concat([
+        "grow",
+      ])}>
+        <PlayerWindow
+          inventory={firstPlayer}
+          agreed={() => {}}
+          disagreed={() => {}}
+        />
+      </div>
+      <div class={concat([
+        "flex",
+        "justify-center",
+      ])}>
+        <hr class={concat([
+          "w-[80%]",
+        ])} />
+      </div>
+      <div class={concat([
+        "grow"
+      ])}>
+        <PlayerWindow
+          inventory={secondPlayer}
+          agreed={() => {}}
+          disagreed={() => {}}
+        />
+      </div>
     </div>
   </div>
 </main>
