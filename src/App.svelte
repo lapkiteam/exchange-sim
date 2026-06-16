@@ -1,5 +1,16 @@
 <script lang="ts">
   import { concat } from "./lib/utils"
+  import type { Inventory } from "./lib/inventory"
+  import PlayerWindow from "./components/PlayerWindow.svelte"
+
+  const firstPlayer: Inventory = [
+    "вафля",
+    "надкусанная сосиска",
+    "золотой гусь",
+  ]
+  const secondPlayer: Inventory = [
+    "кусь",
+  ]
 </script>
 
 <main>
@@ -18,7 +29,16 @@
       "flex",
       "flex-col",
     ])}>
-      Hello world
+      <PlayerWindow
+        inventory={firstPlayer}
+        agreed={() => {}}
+        disagreed={() => {}}
+      />
+      <PlayerWindow
+        inventory={secondPlayer}
+        agreed={() => {}}
+        disagreed={() => {}}
+      />
     </div>
   </div>
 </main>
