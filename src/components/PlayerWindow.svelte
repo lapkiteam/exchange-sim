@@ -45,14 +45,18 @@
   </div>
   <div>
     <h2>Инвентарь</h2>
-    {#each inventory as item, itemIndex}
-      <button on:click={_ => {
-        offerItem(itemIndex)
-      }}
-      >
-        {item}
-      </button>
-    {/each}
+    <li>
+      {#each inventory as item, itemIndex}
+        <ul>
+          <button on:click={_ => {
+            offerItem(itemIndex)
+          }}
+          >
+            {item}
+          </button>
+        </ul>
+      {/each}
+    </li>
   </div>
   <div>
     <button
