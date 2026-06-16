@@ -36,7 +36,9 @@
 
 <div>
   <div>
-    <h2>Предложение</h2>
+    <h2 class={concat([
+      "text-xl"
+    ])}>Предложение</h2>
     <button on:click={() => {
       disofferItem()
     }}>
@@ -44,7 +46,9 @@
     </button>
   </div>
   <div>
-    <h2>Инвентарь</h2>
+    <h2 class={concat([
+      "text-xl"
+    ])}>Инвентарь</h2>
     <li>
       {#each inventory as item, itemIndex}
         <ul>
