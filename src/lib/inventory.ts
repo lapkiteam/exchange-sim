@@ -23,4 +23,13 @@ export namespace Inventory {
       $splice: [[index, 1]]
     })
   }
+
+  export function pushItem(
+    inventory: Inventory,
+    offeredItem: Item,
+  ) {
+    return update(inventory, {
+      $push: [offeredItem]
+    })
+  }
 }

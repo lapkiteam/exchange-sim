@@ -20,6 +20,12 @@
     offeredItem = newOfferedItem
   }
 
+  function disofferItem() {
+    if (!offeredItem) { return }
+    inventory = Inventory.pushItem(inventory, offeredItem)
+    offeredItem = undefined
+  }
+
   let agreedState = false
 
   function toggleAgreedState() {
@@ -31,7 +37,11 @@
 <div>
   <div>
     <h2>Предложение</h2>
-    {offeredItem}
+    <button on:click={() => {
+      disofferItem()
+    }}>
+      {offeredItem}
+    </button>
   </div>
   <div>
     <h2>Инвентарь</h2>
