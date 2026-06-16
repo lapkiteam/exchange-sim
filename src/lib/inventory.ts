@@ -20,7 +20,7 @@ export namespace Inventory {
     index: number,
   ): Inventory {
     return update(inventory, {
-      $splice: [[index]]
+      $splice: [[index, 1]]
     })
   }
 }
