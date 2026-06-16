@@ -51,18 +51,18 @@
     <h2 class={concat([
       "text-xl"
     ])}>Инвентарь</h2>
-    <li>
+    <ul>
       {#each inventory as item, itemIndex}
-        <ul>
+        <li>
           <button on:click={_ => {
             offerItem(itemIndex)
           }}
           >
             {item}
           </button>
-        </ul>
+        </li>
       {/each}
-    </li>
+    </ul>
   </div>
   <div>
     <button
