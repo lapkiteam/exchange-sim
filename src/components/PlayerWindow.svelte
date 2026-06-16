@@ -39,11 +39,13 @@
     <h2 class={concat([
       "text-xl"
     ])}>Предложение</h2>
-    <button on:click={() => {
-      disofferItem()
-    }}>
-      {offeredItem}
-    </button>
+    {#if offeredItem}
+      <button on:click={() => {
+        disofferItem()
+      }}>
+        {offeredItem}
+      </button>
+    {/if}
   </div>
   <div>
     <h2 class={concat([
