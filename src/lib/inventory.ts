@@ -1,6 +1,6 @@
 import update from "immutability-helper"
 
-import { Item } from "./exchange"
+import { type Item } from "./exchange"
 
 export type Inventory = Item[]
 
