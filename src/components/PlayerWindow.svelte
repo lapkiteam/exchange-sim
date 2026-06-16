@@ -13,9 +13,9 @@
     const newOfferedItem = inventory[itemIndex]
     if (!newOfferedItem) { return }
     if (offeredItem) {
-      Inventory.setItemAt(inventory, offeredItem, itemIndex)
+      inventory = Inventory.setItemAt(inventory, offeredItem, itemIndex)
     } else {
-      Inventory.removeItem(inventory, itemIndex)
+      inventory = Inventory.removeItem(inventory, itemIndex)
     }
     offeredItem = newOfferedItem
   }
