@@ -2,6 +2,7 @@
   import { concat } from "../lib/utils"
   import type { Item } from "../lib/exchange"
   import { Inventory } from "../lib/inventory"
+  import ItemView from "./Item.svelte"
 
   export let inventory: Inventory
   export let agreed: () => void
@@ -53,11 +54,13 @@
       "overflow-y-auto",
       "flex",
       "flex-col",
+      "gap-1",
     ])}>
       <h2 class={concat([
         "text-xl",
       ])}>Инвентарь</h2>
       <ul class={concat([
+        "pl-1",
         "overflow-y-auto",
       ])}>
         {#each inventory as item, itemIndex}
@@ -66,7 +69,7 @@
               offerItem(itemIndex)
             }}
             >
-              {item}
+              <ItemView item={item}/>
             </button>
           </li>
         {/each}
@@ -84,7 +87,7 @@
         <button on:click={() => {
           disofferItem()
         }}>
-          {offeredItem}
+          <ItemView item={offeredItem}/>
         </button>
       {/if}
     </div>

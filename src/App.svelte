@@ -1,42 +1,34 @@
 <script lang="ts">
   import { concat } from "./lib/utils"
   import type { Inventory } from "./lib/inventory"
+  import type { Item } from "./lib/exchange"
   import PlayerWindow from "./components/PlayerWindow.svelte"
 
+  const items: Item[] = [
+    {
+      name: "Микрофон с перегрузом",
+      image: {
+        src: "items/microphone.webp",
+        alt: "microphone",
+      },
+    },
+    {
+      name: "Отпечаток лапки",
+      image: undefined,
+    },
+    {
+      name: "Кусь",
+      image: undefined,
+    },
+
+  ]
+
   const firstPlayer: Inventory = [
-    "вафля",
-    "надкусанная сосиска",
-    "золотой гусь",
-    "вафля",
-    "надкусанная сосиска",
-    "золотой гусь",
-    "вафля",
-    "надкусанная сосиска",
-    "золотой гусь",
-    "вафля",
-    "надкусанная сосиска",
-    "золотой гусь",
-    "вафля",
-    "надкусанная сосиска",
-    "золотой гусь",
-    "вафля",
-    "надкусанная сосиска",
-    "золотой гусь",
-    "вафля",
-    "надкусанная сосиска",
-    "золотой гусь",
-    "вафля",
-    "надкусанная сосиска",
-    "золотой гусь",
+    ...items,
+    ...items,
   ]
   const secondPlayer: Inventory = [
-    "кусь",
-    "вафля",
-    "надкусанная сосиска",
-    "золотой гусь",
-    "вафля",
-    "надкусанная сосиска",
-    "золотой гусь",
+    ...items,
   ]
 </script>
 
@@ -56,7 +48,7 @@
       "flex",
       "flex-col",
       "p-2",
-      "gap-1",
+      "gap-3",
     ])}>
       <div class={concat([
         "grow",
