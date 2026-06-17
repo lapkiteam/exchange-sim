@@ -56,7 +56,7 @@
       "flex",
       "flex-col",
       "p-2",
-      "gap-1",
+      "gap-3",
     ])}>
       <div class={concat([
         "grow",

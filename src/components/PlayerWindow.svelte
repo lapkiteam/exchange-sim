@@ -53,11 +53,13 @@
       "overflow-y-auto",
       "flex",
       "flex-col",
+      "gap-1",
     ])}>
       <h2 class={concat([
         "text-xl",
       ])}>Инвентарь</h2>
       <ul class={concat([
+        "pl-1",
         "overflow-y-auto",
       ])}>
         {#each inventory as item, itemIndex}
@@ -66,7 +68,22 @@
               offerItem(itemIndex)
             }}
             >
-              {item}
+              <div class={concat([
+                "flex",
+                "items-center",
+                "gap-2",
+              ])}>
+                <img
+                  class={concat([
+                    "size-8",
+                    // "bg-red-500",
+                    "object-contain",
+                  ])}
+                  src="microphone.png"
+                  alt="microphone"
+                />
+                <div>{item}</div>
+              </div>
             </button>
           </li>
         {/each}
