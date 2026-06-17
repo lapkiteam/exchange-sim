@@ -4,7 +4,7 @@
   import { concat } from "../lib/utils"
   import type { Inventory } from "../lib/inventory"
   import type { Item } from "../lib/item"
-  import PlayerWindow from "./PlayerWindow.svelte"
+  import PlayerWindow from "../components/PlayerWindow.svelte"
 
   const items: Item[] = [
     {

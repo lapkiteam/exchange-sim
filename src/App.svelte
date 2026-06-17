@@ -3,7 +3,7 @@
   import Router from "svelte-spa-router"
 
   import { concat } from "./lib/utils"
-  import Exchange from "./components/Exchange.svelte"
+  import Exchange from "./routes/Exchange.svelte"
   import Home from "./routes/Home.svelte"
 
   const routes: RouteDefinition = {
