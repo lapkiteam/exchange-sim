@@ -1,7 +1,7 @@
 <script lang="ts">
   import { concat } from "../lib/utils"
   import { Inventory } from "../lib/inventory"
-  import ItemView from "./Item.svelte"
+  import ItemsList from "./ItemsList.svelte"
 
   export let inventory: Inventory
   export let agreed: () => void
@@ -44,52 +44,16 @@
     "overflow-y-auto",
     "gap-4",
   ])}>
-    <div class={concat([
-      "grow",
-      "size-full",
-      "overflow-y-auto",
-      "flex",
-      "flex-col",
-      "gap-1",
-    ])}>
-      <h2 class={concat([
-        "text-xl",
-      ])}>Инвентарь</h2>
-      <ul class={concat([
-        "pl-1",
-        "overflow-y-auto",
-      ])}>
-        {#each inventory as item, itemIndex}
-          <li>
-            <button on:click={_ => {
-              offerItem(itemIndex)
-            }}
-            >
-              <ItemView item={item}/>
-            </button>
-          </li>
-        {/each}
-      </ul>
-    </div>
-    <div class={concat([
-      "grow",
-      "size-full",
-      "overflow-y-auto",
-    ])}>
-      <h2 class={concat([
-        "text-xl"
-      ])}>Предложение</h2>
-      {#each offeredItems as item, itemIndex}
-        <li>
-          <button on:click={_ => {
-            disofferItem(itemIndex)
-          }}
-          >
-            <ItemView item={item}/>
-          </button>
-        </li>
-      {/each}
-    </div>
+    <ItemsList
+      title="Инвентарь"
+      items={inventory}
+      onClick={offerItem}
+    />
+    <ItemsList
+      title="Предложение"
+      items={offeredItems}
+      onClick={disofferItem}
+    />
   </div>
   <div class={concat([
     "flex",
