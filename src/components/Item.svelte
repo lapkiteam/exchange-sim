@@ -14,7 +14,6 @@
     <img
       class={concat([
         "size-8",
-        // "bg-red-500",
         "object-contain",
       ])}
       src={item.image.src}
