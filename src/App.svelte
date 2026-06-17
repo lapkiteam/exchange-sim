@@ -8,7 +8,7 @@
     {
       name: "Микрофон с перегрузом",
       image: {
-        src: "items/microphone.png",
+        src: "items/microphone.webp",
         alt: "microphone",
       },
     },
