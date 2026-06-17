@@ -1,6 +1,5 @@
 <script lang="ts">
   import { concat } from "../lib/utils"
-  import type { Item } from "../lib/item"
   import { Inventory } from "../lib/inventory"
   import ItemView from "./Item.svelte"
 
@@ -8,23 +7,20 @@
   export let agreed: () => void
   export let disagreed: () => void
 
-  let offeredItem: Item | undefined = undefined // todo: сделать списком
+  let offeredItems: Inventory = []
 
   function offerItem(itemIndex: number) {
     const newOfferedItem = inventory[itemIndex]
     if (!newOfferedItem) { return }
-    if (offeredItem) {
-      inventory = Inventory.setItemAt(inventory, offeredItem, itemIndex)
-    } else {
-      inventory = Inventory.removeItem(inventory, itemIndex)
-    }
-    offeredItem = newOfferedItem
+    inventory = Inventory.removeItem(inventory, itemIndex)
+    offeredItems = Inventory.pushItem(offeredItems, newOfferedItem)
   }
 
-  function disofferItem() {
+  function disofferItem(itemIndex: number) {
+    const offeredItem = offeredItems[itemIndex]
     if (!offeredItem) { return }
     inventory = Inventory.pushItem(inventory, offeredItem)
-    offeredItem = undefined
+    offeredItems = Inventory.removeItem(offeredItems, itemIndex)
   }
 
   let agreedState = false
@@ -83,13 +79,16 @@
       <h2 class={concat([
         "text-xl"
       ])}>Предложение</h2>
-      {#if offeredItem}
-        <button on:click={() => {
-          disofferItem()
-        }}>
-          <ItemView item={offeredItem}/>
-        </button>
-      {/if}
+      {#each offeredItems as item, itemIndex}
+        <li>
+          <button on:click={_ => {
+            disofferItem(itemIndex)
+          }}
+          >
+            <ItemView item={item}/>
+          </button>
+        </li>
+      {/each}
     </div>
   </div>
   <div class={concat([
