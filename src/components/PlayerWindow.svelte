@@ -37,11 +37,14 @@
 <div class={concat([
   "flex",
   "flex-col",
-  "h-full",
+  "size-full",
   "gap-4",
+  "overflow-y-auto",
 ])}>
   <div class={concat([
-    "grow"
+    "grow",
+    "size-full",
+    "overflow-y-auto",
   ])}>
     <h2 class={concat([
       "text-xl"
@@ -55,12 +58,18 @@
     {/if}
   </div>
   <div class={concat([
-    "grow"
+    "grow",
+    "size-full",
+    "overflow-y-auto",
+    "flex",
+    "flex-col",
   ])}>
     <h2 class={concat([
-      "text-xl"
+      "text-xl",
     ])}>Инвентарь</h2>
-    <ul>
+    <ul class={concat([
+      "overflow-y-auto",
+    ])}>
       {#each inventory as item, itemIndex}
         <li>
           <button on:click={_ => {
@@ -82,6 +91,7 @@
       class={concat([
         agreedState ? "bg-green-500" : "bg-gray-500",
         "p-2",
+        "size-fit",
       ])}
       on:click={_ => {
         toggleAgreedState()
