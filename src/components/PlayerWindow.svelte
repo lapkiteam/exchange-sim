@@ -38,54 +38,60 @@
   "flex",
   "flex-col",
   "size-full",
-  "gap-4",
+  "gap-3",
   "overflow-y-auto",
 ])}>
   <div class={concat([
-    "grow",
-    "size-full",
-    "overflow-y-auto",
-  ])}>
-    <h2 class={concat([
-      "text-xl"
-    ])}>Предложение</h2>
-    {#if offeredItem}
-      <button on:click={() => {
-        disofferItem()
-      }}>
-        {offeredItem}
-      </button>
-    {/if}
-  </div>
-  <div class={concat([
-    "grow",
-    "size-full",
-    "overflow-y-auto",
     "flex",
-    "flex-col",
+    "size-full",
+    "overflow-y-auto",
+    "gap-4",
   ])}>
-    <h2 class={concat([
-      "text-xl",
-    ])}>Инвентарь</h2>
-    <ul class={concat([
+    <div class={concat([
+      "grow",
+      "size-full",
+      "overflow-y-auto",
+      "flex",
+      "flex-col",
+    ])}>
+      <h2 class={concat([
+        "text-xl",
+      ])}>Инвентарь</h2>
+      <ul class={concat([
+        "overflow-y-auto",
+      ])}>
+        {#each inventory as item, itemIndex}
+          <li>
+            <button on:click={_ => {
+              offerItem(itemIndex)
+            }}
+            >
+              {item}
+            </button>
+          </li>
+        {/each}
+      </ul>
+    </div>
+    <div class={concat([
+      "grow",
+      "size-full",
       "overflow-y-auto",
     ])}>
-      {#each inventory as item, itemIndex}
-        <li>
-          <button on:click={_ => {
-            offerItem(itemIndex)
-          }}
-          >
-            {item}
-          </button>
-        </li>
-      {/each}
-    </ul>
+      <h2 class={concat([
+        "text-xl"
+      ])}>Предложение</h2>
+      {#if offeredItem}
+        <button on:click={() => {
+          disofferItem()
+        }}>
+          {offeredItem}
+        </button>
+      {/if}
+    </div>
   </div>
   <div class={concat([
     "flex",
     "justify-center",
-    "p-2",
   ])}>
     <button
       class={concat([
