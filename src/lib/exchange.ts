@@ -1,14 +1,6 @@
 import update from "immutability-helper"
 
-export type Image = {
-  src: string
-  alt: string
-}
-
-export type Item = {
-  name: string
-  image?: Image
-}
+import { type Item } from "./item"
 
 export type Offer = Item[]
 
