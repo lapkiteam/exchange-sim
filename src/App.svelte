@@ -1,35 +1,15 @@
 <script lang="ts">
+  import { type RouteDefinition } from "svelte-spa-router"
+  import Router from "svelte-spa-router"
+
   import { concat } from "./lib/utils"
-  import type { Inventory } from "./lib/inventory"
-  import type { Item } from "./lib/item"
   import Exchange from "./components/Exchange.svelte"
+  import Home from "./routes/Home.svelte"
 
-  const items: Item[] = [
-    {
-      name: "Микрофон с перегрузом",
-      image: {
-        src: "items/microphone.webp",
-        alt: "microphone",
-      },
-    },
-    {
-      name: "Отпечаток лапки",
-      image: undefined,
-    },
-    {
-      name: "Кусь",
-      image: undefined,
-    },
-
-  ]
-
-  const firstPlayer: Inventory = [
-    ...items,
-    ...items,
-  ]
-  const secondPlayer: Inventory = [
-    ...items,
-  ]
+  const routes: RouteDefinition = {
+    "/": Home,
+    "/exchange": Exchange,
+  }
 </script>
 
 <main>
@@ -47,10 +27,7 @@
       "h-[calc(var(--vh,_1vh)_*_100)]",
       "p-2",
     ])}>
-      <Exchange
-        firstPlayer={firstPlayer}
-        secondPlayer={secondPlayer}
-      />
+      <Router routes={routes} />
     </div>
   </div>
 </main>

@@ -1,10 +1,41 @@
 <script lang="ts">
+  import { push } from "svelte-spa-router"
+
   import { concat } from "../lib/utils"
   import type { Inventory } from "../lib/inventory"
+  import type { Item } from "../lib/item"
   import PlayerWindow from "./PlayerWindow.svelte"
 
-  export let firstPlayer: Inventory
-  export let secondPlayer: Inventory
+  const items: Item[] = [
+    {
+      name: "Микрофон с перегрузом",
+      image: {
+        src: "items/microphone.webp",
+        alt: "microphone",
+      },
+    },
+    {
+      name: "Отпечаток лапки",
+      image: undefined,
+    },
+    {
+      name: "Кусь",
+      image: undefined,
+    },
+
+  ]
+
+  const firstPlayer: Inventory = [
+    ...items,
+    ...items,
+  ]
+  const secondPlayer: Inventory = [
+    ...items,
+  ]
+
+  function back() {
+    push("/")
+  }
 </script>
 
 <div class={concat([
@@ -19,8 +50,8 @@
   ])}>
     <PlayerWindow
       inventory={firstPlayer}
-      agreed={() => {}}
-      disagreed={() => {}}
+      agreed={() => { back() }}
+      disagreed={() => { back() }}
     />
   </div>
   <div class={concat([
@@ -37,8 +68,8 @@
   ])}>
     <PlayerWindow
       inventory={secondPlayer}
-      agreed={() => {}}
-      disagreed={() => {}}
+      agreed={() => { back() }}
+      disagreed={() => { back() }}
     />
   </div>
 </div>
