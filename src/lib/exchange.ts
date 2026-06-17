@@ -1,6 +1,7 @@
 import update from "immutability-helper"
 
 import { type Item } from "./item"
+import { type Player } from "./player"
 
 export type Offer = Item[]
 
@@ -34,6 +35,19 @@ export type Exchange = {
 }
 
 export namespace Exchange {
+  export function create(p1: Player, p2: Player): Exchange {
+    return {
+      FirstParticipant: {
+        Offer: [],
+        Agreed: false,
+      },
+      SecondParticipant: {
+        Offer: [],
+        Agreed: false,
+      },
+    }
+  }
+
   export function setFirstOffer(
     exchange: Exchange,
     newOffer: Offer,
@@ -54,13 +68,18 @@ export namespace Exchange {
   export function setFirstAgreed(
     exchange: Exchange,
     newAgreed: ExchangeParticipant["Agreed"],
-  ): Exchange {
-    return update(exchange, {
+  ) {
+    const updatedExchange = update(exchange, {
       FirstParticipant: {
         $apply: part =>
           ExchangeParticipant.setAgreed(part, newAgreed),
       }
     })
+    const bothAgreed = newAgreed && exchange.SecondParticipant.Agreed
+    return {
+      updatedExchange,
+      bothAgreed,
+    }
   }
 
   export function setSecondOffer(
@@ -83,12 +102,17 @@ export namespace Exchange {
   export function setSecondAgreed(
     exchange: Exchange,
     newAgreed: ExchangeParticipant["Agreed"],
-  ): Exchange {
-    return update(exchange, {
+  ) {
+    const updatedExchange = update(exchange, {
       SecondParticipant: {
         $apply: part =>
-          ExchangeParticipant.setAgreed(part, newAgreed),
+        ExchangeParticipant.setAgreed(part, newAgreed),
       }
     })
+    const bothAgreed = newAgreed && exchange.FirstParticipant.Agreed
+    return {
+      updatedExchange,
+      bothAgreed,
+    }
   }
 }
