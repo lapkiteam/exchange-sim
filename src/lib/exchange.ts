@@ -1,6 +1,14 @@
 import update from "immutability-helper"
 
-export type Item = string
+export type Image = {
+  src: string
+  alt: string
+}
+
+export type Item = {
+  name: string
+  image?: Image
+}
 
 export type Offer = Item[]
 

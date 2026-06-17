@@ -73,16 +73,18 @@
                 "items-center",
                 "gap-2",
               ])}>
-                <img
-                  class={concat([
-                    "size-8",
-                    // "bg-red-500",
-                    "object-contain",
-                  ])}
-                  src="items/microphone.png"
-                  alt="microphone"
-                />
-                <div>{item}</div>
+                {#if item.image}
+                  <img
+                    class={concat([
+                      "size-8",
+                      // "bg-red-500",
+                      "object-contain",
+                    ])}
+                    src={item.image.src}
+                    alt={item.image.alt}
+                  />
+                {/if}
+                <div>{item.name}</div>
               </div>
             </button>
           </li>
