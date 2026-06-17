@@ -2,6 +2,7 @@
   import { concat } from "../lib/utils"
   import type { Item } from "../lib/exchange"
   import { Inventory } from "../lib/inventory"
+  import ItemView from "./Item.svelte"
 
   export let inventory: Inventory
   export let agreed: () => void
@@ -68,24 +69,7 @@
               offerItem(itemIndex)
             }}
             >
-              <div class={concat([
-                "flex",
-                "items-center",
-                "gap-2",
-              ])}>
-                {#if item.image}
-                  <img
-                    class={concat([
-                      "size-8",
-                      // "bg-red-500",
-                      "object-contain",
-                    ])}
-                    src={item.image.src}
-                    alt={item.image.alt}
-                  />
-                {/if}
-                <div>{item.name}</div>
-              </div>
+              <ItemView item={item}/>
             </button>
           </li>
         {/each}
