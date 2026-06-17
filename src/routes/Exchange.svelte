@@ -2,8 +2,9 @@
   import { push } from "svelte-spa-router"
 
   import { concat } from "../lib/utils"
-  import type { Inventory } from "../lib/inventory"
   import type { Item } from "../lib/item"
+  import type { Player } from "../lib/player"
+  import { Exchange } from "../lib/exchange"
   import PlayerWindow from "../components/PlayerWindow.svelte"
 
   const items: Item[] = [
@@ -25,13 +26,16 @@
 
   ]
 
-  const firstPlayer: Inventory = [
+  const firstPlayer: Player = [
     ...items,
     ...items,
   ]
-  const secondPlayer: Inventory = [
+  const secondPlayer: Player = [
     ...items,
   ]
+
+  let exchange: Exchange = Exchange.create(
+    firstPlayer, secondPlayer)
 
   function back() {
     push("/")
@@ -50,8 +54,12 @@
   ])}>
     <PlayerWindow
       inventory={firstPlayer}
-      agreed={() => { back() }}
-      disagreed={() => { back() }}
+      setAgreed={newAgreed => {
+        const { updatedExchange, bothAgreed } =
+          Exchange.setFirstAgreed(exchange, newAgreed)
+        exchange = updatedExchange
+        if (bothAgreed) { back() }
+      }}
     />
   </div>
   <div class={concat([
@@ -68,8 +76,12 @@
   ])}>
     <PlayerWindow
       inventory={secondPlayer}
-      agreed={() => { back() }}
-      disagreed={() => { back() }}
+      setAgreed={newAgreed => {
+        const { updatedExchange, bothAgreed } =
+          Exchange.setSecondAgreed(exchange, newAgreed)
+        exchange = updatedExchange
+        if (bothAgreed) { back() }
+      }}
     />
   </div>
 </div>

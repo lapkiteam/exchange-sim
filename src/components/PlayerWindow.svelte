@@ -4,8 +4,7 @@
   import ItemsList from "./ItemsList.svelte"
 
   export let inventory: Inventory
-  export let agreed: () => void
-  export let disagreed: () => void
+  export let setAgreed: (newAgreed: boolean) => void
 
   let offeredItems: Inventory = []
 
@@ -26,8 +25,8 @@
   let agreedState = false
 
   function toggleAgreedState() {
-    if (agreedState) { disagreed() } else { agreed() }
     agreedState = !agreedState
+    setAgreed(agreedState)
   }
 </script>
 
