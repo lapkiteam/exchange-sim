@@ -1,7 +1,7 @@
 <script lang="ts">
   import { concat } from "./lib/utils"
   import type { Inventory } from "./lib/inventory"
-  import type { Item } from "./lib/exchange"
+  import type { Item } from "./lib/item"
   import PlayerWindow from "./components/PlayerWindow.svelte"
 
   const items: Item[] = [

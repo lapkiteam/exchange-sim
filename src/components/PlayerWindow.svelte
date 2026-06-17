@@ -1,6 +1,6 @@
 <script lang="ts">
   import { concat } from "../lib/utils"
-  import type { Item } from "../lib/exchange"
+  import type { Item } from "../lib/item"
   import { Inventory } from "../lib/inventory"
   import ItemView from "./Item.svelte"
 
