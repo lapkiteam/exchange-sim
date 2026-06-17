@@ -79,7 +79,7 @@
                     // "bg-red-500",
                     "object-contain",
                   ])}
-                  src="microphone.png"
+                  src="items/microphone.png"
                   alt="microphone"
                 />
                 <div>{item}</div>
