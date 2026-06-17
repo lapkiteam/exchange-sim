@@ -87,7 +87,7 @@
         <button on:click={() => {
           disofferItem()
         }}>
-          {offeredItem}
+          <ItemView item={offeredItem}/>
         </button>
       {/if}
     </div>
