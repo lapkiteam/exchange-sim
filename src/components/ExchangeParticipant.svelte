@@ -6,6 +6,7 @@
   import ItemView from "./Item.svelte"
 
   export let inventory: Inventory
+  export let agreed = false
   export let update: (
     offeredItems: Item[],
     undatedInventory: Inventory,
@@ -28,8 +29,6 @@
     inventory = Inventory.pushItem(inventory, offeredItem)
     offeredItems = Inventory.removeItem(offeredItems, itemIndex)
   }
-
-  let agreed = false
 
   function toggleAgreedState() {
     agreed = !agreed
