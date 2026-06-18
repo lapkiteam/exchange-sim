@@ -9,11 +9,7 @@
     offeredItems: Item[],
     undatedInventory: Inventory,
   ) => void
-  export let agree: (
-    offeredItems: Item[],
-    undatedInventory: Inventory,
-  ) => void
-  export let disagree: () => void
+  export let setAgreed: (agreed: boolean) => void
 
   let offeredItems: Inventory = []
 
@@ -36,11 +32,7 @@
 
   function toggleAgreedState() {
     agreedState = !agreedState
-    if (agreedState) {
-      agree(offeredItems, inventory)
-    } else {
-      disagree()
-    }
+    setAgreed(agreedState)
   }
 </script>
 

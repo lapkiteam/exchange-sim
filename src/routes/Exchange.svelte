@@ -5,7 +5,6 @@
   import { concat } from "../lib/utils"
   import { Player } from "../lib/player"
   import { Exchange } from "../lib/exchange"
-  import { Inventory } from "../lib/inventory"
   import { Players, players } from "../stores/players.svelte"
   import PlayerWindow from "../components/PlayerWindow.svelte"
 
@@ -62,16 +61,11 @@
           Exchange.setFirst(exchange, offeredItems, updatedInventory)
         )
       }}
-      agree={() => {
+      setAgreed={newAgreed => {
         const { updatedExchange, bothAgreed } =
-          Exchange.setFirstAgreed(exchange, true)
+          Exchange.setFirstAgreed(exchange, newAgreed)
         exchange = updatedExchange
         if (bothAgreed) { back() }
-      }}
-      disagree={() => {
-        const { updatedExchange } =
-          Exchange.setFirstAgreed(exchange, false)
-        exchange = updatedExchange
       }}
     />
   </div>
@@ -94,16 +88,11 @@
           Exchange.setSecond(exchange, offeredItems, updatedInventory)
         )
       }}
-      agree={() => {
+      setAgreed={newAgreed => {
         const { updatedExchange, bothAgreed } =
-          Exchange.setSecondAgreed(exchange, true)
+          Exchange.setSecondAgreed(exchange, newAgreed)
         exchange = updatedExchange
         if (bothAgreed) { back() }
-      }}
-      disagree={() => {
-        const { updatedExchange } =
-          Exchange.setSecondAgreed(exchange, false)
-        exchange = updatedExchange
       }}
     />
   </div>
