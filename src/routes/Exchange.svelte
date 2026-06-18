@@ -2,50 +2,20 @@
   import { push } from "svelte-spa-router"
 
   import { concat } from "../lib/utils"
-  import type { Item } from "../lib/item"
   import { Player } from "../lib/player"
   import { Exchange } from "../lib/exchange"
-  import PlayerWindow from "../components/PlayerWindow.svelte"
   import { Inventory } from "../lib/inventory"
+  import { Players, players } from "../stores/players.svelte"
+  import PlayerWindow from "../components/PlayerWindow.svelte"
 
-  const items: Item[] = [
-    {
-      name: "Микрофон с перегрузом",
-      image: {
-        src: "items/microphone.webp",
-        alt: "microphone",
-      },
-    },
-    {
-      name: "Отпечаток лапки",
-      image: undefined,
-    },
-    {
-      name: "Кусь",
-      image: undefined,
-    },
-
-  ]
-
-  const firstPlayer: Player = {
-    id: "firstPlayer",
-    inventory: [
-      ...items,
-      ...items,
-    ],
-  }
+  const firstPlayer: Player = $players.get("firstPlayer") as Player
 
   let finalFirstPlayer = firstPlayer
   function updateFirstPlayer(updating: (player: Player) => Player) {
     finalFirstPlayer = updating(firstPlayer)
   }
 
-  const secondPlayer: Player = {
-    id: "secondPlayer",
-    inventory: [
-      ...items,
-    ],
-  }
+  const secondPlayer: Player = $players.get("secondPlayer") as Player
 
   let finalSecondPlayer = secondPlayer
   function updateSecondPlayer(updating: (player: Player) => Player) {
@@ -56,6 +26,12 @@
     firstPlayer, secondPlayer)
 
   function back() {
+    players.set(
+      Players.setPlayer(
+        Players.setPlayer($players, finalFirstPlayer),
+        finalSecondPlayer,
+      )
+    )
     push("/")
   }
 </script>
