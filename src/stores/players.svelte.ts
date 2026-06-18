@@ -38,10 +38,12 @@ const items: Item[] = [
 
 ]
 
+export const currentPlayerId = "firstPlayer"
+
 export const players = (() => {
   const players: Players = new Map([
     {
-      id: "firstPlayer",
+      id: currentPlayerId,
       inventory: [],
     },
     {
@@ -49,6 +51,12 @@ export const players = (() => {
       inventory: [
         ...items,
       ],
+    },
+    {
+      id: "adalinda",
+      inventory: [
+        ...items,
+      ]
     },
   ].map(p => [p.id, p]))
 
