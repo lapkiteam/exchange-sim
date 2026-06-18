@@ -1,4 +1,5 @@
 import update from "immutability-helper"
+import { pipeInto } from "ts-functional-pipe"
 
 import { type Item } from "./item"
 import { type Player } from "./player"
@@ -58,19 +59,24 @@ export namespace Exchange {
     newInventory: Inventory,
   ): Exchange {
     // todo: не обновлять, если новое предложение равно старому
-    return update(exchange, {
-      FirstParticipant: {
-        Offer: {
-          $set: newOffer,
-        },
-        Inventory: {
-          $set: newInventory,
-        },
-      },
-      SecondParticipant: {
-        $apply: ExchangeParticipant.disagreed
-      }
-    })
+    return pipeInto(
+      exchange,
+      exchange => update(exchange, {
+        FirstParticipant: {
+          Offer: {
+            $set: newOffer,
+          },
+          Inventory: {
+            $set: newInventory,
+          },
+        }
+      }),
+      exchange => update(exchange, {
+        SecondParticipant: {
+          $apply: ExchangeParticipant.disagreed
+        }
+      })
+    )
   }
 
   export function setFirstAgreed(
@@ -96,19 +102,24 @@ export namespace Exchange {
     newInventory: Inventory,
   ): Exchange {
     // todo: не обновлять, если новое предложение равно старому
-    return update(exchange, {
-      FirstParticipant: {
-        $apply: ExchangeParticipant.disagreed
-      },
-      SecondParticipant: {
-        Offer: {
-          $set: newOffer,
+    return pipeInto(
+      exchange,
+      exchange => update(exchange, {
+        SecondParticipant: {
+          Offer: {
+            $set: newOffer,
+          },
+          Inventory: {
+            $set: newInventory,
+          },
+        }
+      }),
+      exchange => update(exchange, {
+        FirstParticipant: {
+          $apply: ExchangeParticipant.disagreed
         },
-        Inventory: {
-          $set: newInventory,
-        },
-      }
-    })
+      }),
+    )
   }
 
   export function setSecondAgreed(
