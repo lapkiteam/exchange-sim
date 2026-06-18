@@ -53,6 +53,22 @@ export namespace Exchange {
     }
   }
 
+  export function disagree(exchange: Exchange): Exchange {
+    return pipeInto(
+      exchange,
+      exchange => update(exchange, {
+        FirstParticipant: {
+          $apply: ExchangeParticipant.disagreed
+        }
+      }),
+      exchange => update(exchange, {
+        SecondParticipant: {
+          $apply: ExchangeParticipant.disagreed
+        }
+      })
+    )
+  }
+
   export function setFirst(
     exchange: Exchange,
     newOffer: Offer,
@@ -71,11 +87,7 @@ export namespace Exchange {
           },
         }
       }),
-      exchange => update(exchange, {
-        SecondParticipant: {
-          $apply: ExchangeParticipant.disagreed
-        }
-      })
+      disagree,
     )
   }
 
@@ -114,11 +126,7 @@ export namespace Exchange {
           },
         }
       }),
-      exchange => update(exchange, {
-        FirstParticipant: {
-          $apply: ExchangeParticipant.disagreed
-        },
-      }),
+      disagree,
     )
   }
 
