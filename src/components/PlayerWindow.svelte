@@ -3,6 +3,7 @@
   import { type Item } from "../lib/item"
   import { Inventory } from "../lib/inventory"
   import ItemsList from "./ItemsList.svelte"
+  import ItemView from "./Item.svelte"
 
   export let inventory: Inventory
   export let update: (
@@ -53,12 +54,18 @@
       title="Инвентарь"
       items={inventory}
       onClick={offerItem}
-    />
+      let:item
+    >
+      <ItemView item={item} />
+    </ItemsList>
     <ItemsList
       title="Предложение"
       items={offeredItems}
       onClick={disofferItem}
-    />
+      let:item
+    >
+      <ItemView item={item} />
+    </ItemsList>
   </div>
   <div class={concat([
     "flex",
