@@ -1,10 +1,8 @@
 <script lang="ts">
   import { concat } from "../lib/utils"
-  import type { Item } from "../lib/item"
-  import ItemView from "./Item.svelte"
 
   export let title
-  export let items: Item[]
+  export let items: any[]
   export let onClick: ((itemIndex: number) => void)
 </script>
 
@@ -27,7 +25,7 @@
         <button on:click={_ => {
           onClick(itemIndex)
         }}>
-          <ItemView item={item}/>
+          <slot item={item} index={itemIndex} />
         </button>
       </li>
     {/each}
