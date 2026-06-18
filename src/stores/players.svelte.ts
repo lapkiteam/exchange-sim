@@ -19,26 +19,7 @@ export namespace Players {
   }
 }
 
-const items: Item[] = [
-  {
-    name: "Микрофон с перегрузом",
-    image: {
-      src: "items/microphone.webp",
-      alt: "microphone",
-    },
-  },
-  {
-    name: "Отпечаток лапки",
-    image: undefined,
-  },
-  {
-    name: "Кусь",
-    image: undefined,
-  },
-
-]
-
-export const currentPlayerId = "firstPlayer"
+export const currentPlayerId = "you"
 
 export const players = (() => {
   const players: Players = new Map([
@@ -48,17 +29,124 @@ export const players = (() => {
       inventory: [],
     },
     {
-      id: "secondPlayer",
-      name: "Второй",
+      id: "agent",
+      name: "Агент",
       inventory: [
-        ...items,
+        {
+          name: "Шляпа",
+          image: undefined,
+        },
+        {
+          name: "Плащ",
+          image: undefined,
+        },
+        {
+          name: "Циркулярка",
+          image: undefined,
+        },
+        {
+          name: "Шнур от компьютера",
+          image: undefined,
+        },
+        {
+          name: "Кисточка",
+          image: undefined,
+        },
       ],
     },
     {
       id: "adalinda",
       name: "Адалинда",
       inventory: [
-        ...items,
+        {
+          name: "Перо",
+          image: undefined,
+        },
+        {
+          name: "Нимб",
+          image: undefined,
+        },
+        {
+          name: "Отпечаток лапки",
+          image: undefined,
+        },
+        {
+          name: "Кусь",
+          image: undefined,
+        },
+      ]
+    },
+    {
+      id: "outscout",
+      name: "Аутскаут",
+      inventory: [
+        {
+          name: "Ирокез",
+          image: undefined,
+        },
+        {
+          name: "Нашивка с енотом",
+          image: undefined,
+        },
+        {
+          name: "Красный галстук",
+          image: undefined,
+        },
+        {
+          name: "Микрофон с перегрузом",
+          image: {
+            src: "items/microphone.webp",
+            alt: "microphone",
+          },
+        },
+      ]
+    },
+    {
+      id: "tuatara",
+      name: "Туатара",
+      inventory: [
+        {
+          name: "Шляпа",
+          image: undefined,
+        },
+        {
+          name: "Посох",
+          image: undefined,
+        },
+        {
+          name: "Одежда",
+          image: undefined,
+        },
+        {
+          name: "Сережка",
+          image: undefined,
+        },
+        {
+          name: "Виар",
+          image: undefined,
+        },
+      ],
+    },
+    {
+      id: "netlenij",
+      name: "Нетленный",
+      inventory: [
+        {
+          name: "Надкушенная сосиска",
+          image: undefined,
+        },
+        {
+          name: "Бутылка пойла",
+          image: undefined,
+        },
+        {
+          name: "Гениальная идея",
+          image: undefined,
+        },
+        {
+          name: "Золотой гусь",
+          image: undefined,
+        },
       ]
     },
   ].map(p => [p.id, p]))
