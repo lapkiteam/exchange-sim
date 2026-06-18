@@ -2,12 +2,14 @@ import update from "immutability-helper"
 
 import { type Item } from "./item"
 import { type Player } from "./player"
+import { Inventory } from "./inventory"
 
 export type Offer = Item[]
 
 export type ExchangeParticipant = {
   Offer: Offer
   Agreed: boolean
+  Inventory: Inventory
 }
 
 export namespace ExchangeParticipant {
@@ -40,24 +42,30 @@ export namespace Exchange {
       FirstParticipant: {
         Offer: [],
         Agreed: false,
+        Inventory: p1.inventory,
       },
       SecondParticipant: {
         Offer: [],
         Agreed: false,
+        Inventory: p2.inventory,
       },
     }
   }
 
-  export function setFirstOffer(
+  export function setFirst(
     exchange: Exchange,
     newOffer: Offer,
+    newInventory: Inventory,
   ): Exchange {
     // todo: не обновлять, если новое предложение равно старому
     return update(exchange, {
       FirstParticipant: {
         Offer: {
-          $set: newOffer
-        }
+          $set: newOffer,
+        },
+        Inventory: {
+          $set: newInventory,
+        },
       },
       SecondParticipant: {
         $apply: ExchangeParticipant.disagreed
@@ -82,9 +90,10 @@ export namespace Exchange {
     }
   }
 
-  export function setSecondOffer(
+  export function setSecond(
     exchange: Exchange,
     newOffer: Offer,
+    newInventory: Inventory,
   ): Exchange {
     // todo: не обновлять, если новое предложение равно старому
     return update(exchange, {
@@ -93,8 +102,11 @@ export namespace Exchange {
       },
       SecondParticipant: {
         Offer: {
-          $set: newOffer
-        }
+          $set: newOffer,
+        },
+        Inventory: {
+          $set: newInventory,
+        },
       }
     })
   }
@@ -113,6 +125,21 @@ export namespace Exchange {
     return {
       updatedExchange,
       bothAgreed,
+    }
+  }
+
+  export function commit(
+    exchange: Exchange
+  ): { first: Inventory, second: Inventory } {
+    return {
+      first: Inventory.pushItems(
+        exchange.FirstParticipant.Inventory,
+        exchange.SecondParticipant.Offer,
+      ),
+      second: Inventory.pushItems(
+        exchange.SecondParticipant.Inventory,
+        exchange.FirstParticipant.Offer,
+      ),
     }
   }
 }

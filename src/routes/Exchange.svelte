@@ -1,5 +1,6 @@
 <script lang="ts">
   import { push } from "svelte-spa-router"
+  import { pipeInto } from "ts-functional-pipe"
 
   import { concat } from "../lib/utils"
   import { Player } from "../lib/player"
@@ -9,29 +10,37 @@
   import PlayerWindow from "../components/PlayerWindow.svelte"
 
   const firstPlayer: Player = $players.get("firstPlayer") as Player
-
-  let finalFirstPlayer = firstPlayer
-  function updateFirstPlayer(updating: (player: Player) => Player) {
-    finalFirstPlayer = updating(firstPlayer)
-  }
-
   const secondPlayer: Player = $players.get("secondPlayer") as Player
 
-  let finalSecondPlayer = secondPlayer
-  function updateSecondPlayer(updating: (player: Player) => Player) {
-    finalSecondPlayer = updating(secondPlayer)
+  let exchange: Exchange = Exchange.create(
+    firstPlayer, secondPlayer
+  )
+  function updateExchange(updating: (exchange: Exchange) => Exchange) {
+    exchange = updating(exchange)
   }
 
-  let exchange: Exchange = Exchange.create(
-    firstPlayer, secondPlayer)
-
   function back() {
+    const exchangeResult = Exchange.commit(exchange)
     players.set(
-      Players.setPlayer(
-        Players.setPlayer($players, finalFirstPlayer),
-        finalSecondPlayer,
+      pipeInto(
+        $players,
+        players => Players.setPlayer(
+          players,
+          Player.setInventory(
+            firstPlayer,
+            exchangeResult.first,
+          ),
+        ),
+        players => Players.setPlayer(
+          players,
+          Player.setInventory(
+            secondPlayer,
+            exchangeResult.second,
+          )
+        ),
       )
     )
+
     push("/")
   }
 </script>
@@ -48,21 +57,15 @@
   ])}>
     <PlayerWindow
       inventory={firstPlayer.inventory}
-      agree={(offeredItems, updatedInventory) => {
+      update={(offeredItems, updatedInventory) => {
+        updateExchange(exchange =>
+          Exchange.setFirst(exchange, offeredItems, updatedInventory)
+        )
+      }}
+      agree={() => {
         const { updatedExchange, bothAgreed } =
           Exchange.setFirstAgreed(exchange, true)
         exchange = updatedExchange
-
-        updateFirstPlayer(player =>
-          Player.setInventory(player, updatedInventory)
-        )
-        updateSecondPlayer(player =>
-          Player.updateInventory(
-            player,
-            inventory => Inventory.pushItems(inventory, offeredItems),
-          )
-        )
-
         if (bothAgreed) { back() }
       }}
       disagree={() => {
@@ -86,21 +89,15 @@
   ])}>
     <PlayerWindow
       inventory={secondPlayer.inventory}
-      agree={(offeredItems, updatedInventory) => {
+      update={(offeredItems, updatedInventory) => {
+        updateExchange(exchange =>
+          Exchange.setSecond(exchange, offeredItems, updatedInventory)
+        )
+      }}
+      agree={() => {
         const { updatedExchange, bothAgreed } =
           Exchange.setSecondAgreed(exchange, true)
         exchange = updatedExchange
-
-        updateSecondPlayer(player =>
-          Player.setInventory(player, updatedInventory)
-        )
-        updateFirstPlayer(player =>
-          Player.updateInventory(
-            player,
-            inventory => Inventory.pushItems(inventory, offeredItems),
-          )
-        )
-
         if (bothAgreed) { back() }
       }}
       disagree={() => {

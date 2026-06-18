@@ -5,6 +5,10 @@
   import ItemsList from "./ItemsList.svelte"
 
   export let inventory: Inventory
+  export let update: (
+    offeredItems: Item[],
+    undatedInventory: Inventory,
+  ) => void
   export let agree: (
     offeredItems: Item[],
     undatedInventory: Inventory,
@@ -18,6 +22,7 @@
     if (!newOfferedItem) { return }
     inventory = Inventory.removeItem(inventory, itemIndex)
     offeredItems = Inventory.pushItem(offeredItems, newOfferedItem)
+    update(inventory, offeredItems)
   }
 
   function disofferItem(itemIndex: number) {
