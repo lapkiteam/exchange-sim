@@ -118,7 +118,7 @@ export namespace Exchange {
     const updatedExchange = update(exchange, {
       SecondParticipant: {
         $apply: part =>
-        ExchangeParticipant.setAgreed(part, newAgreed),
+          ExchangeParticipant.setAgreed(part, newAgreed),
       }
     })
     const bothAgreed = newAgreed && exchange.FirstParticipant.Agreed
