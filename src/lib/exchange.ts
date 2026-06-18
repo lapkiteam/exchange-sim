@@ -25,7 +25,7 @@ export namespace ExchangeParticipant {
     })
   }
 
-  export function disagreed(
+  export function disagree(
     participant: ExchangeParticipant,
   ): ExchangeParticipant {
     return setAgreed(participant, false)
@@ -58,12 +58,12 @@ export namespace Exchange {
       exchange,
       exchange => update(exchange, {
         FirstParticipant: {
-          $apply: ExchangeParticipant.disagreed
+          $apply: ExchangeParticipant.disagree
         }
       }),
       exchange => update(exchange, {
         SecondParticipant: {
-          $apply: ExchangeParticipant.disagreed
+          $apply: ExchangeParticipant.disagree
         }
       })
     )
