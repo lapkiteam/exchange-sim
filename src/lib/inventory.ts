@@ -32,4 +32,13 @@ export namespace Inventory {
       $push: [offeredItem]
     })
   }
+
+  export function pushItems(
+    inventory: Inventory,
+    items: Item[],
+  ) {
+    return update(inventory, {
+      $push: items
+    })
+  }
 }
