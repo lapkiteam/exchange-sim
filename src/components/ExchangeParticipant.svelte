@@ -29,11 +29,11 @@
     offeredItems = Inventory.removeItem(offeredItems, itemIndex)
   }
 
-  let agreedState = false
+  let agreed = false
 
   function toggleAgreedState() {
-    agreedState = !agreedState
-    setAgreed(agreedState)
+    agreed = !agreed
+    setAgreed(agreed)
   }
 </script>
 
@@ -73,7 +73,7 @@
   ])}>
     <button
       class={concat([
-        agreedState ? "bg-green-500" : "bg-gray-500",
+        agreed ? "bg-green-500" : "bg-gray-500",
         "p-2",
         "size-fit",
       ])}
