@@ -41,6 +41,6 @@
     sizeMin
     let:item
   >
-    {item.id}
+    {item.name}
   </ItemsList>
 </div>
