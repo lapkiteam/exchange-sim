@@ -18,7 +18,7 @@
     exchange = updating(exchange)
   }
 
-  function back() {
+  function commit() {
     const exchangeResult = Exchange.commit(exchange)
     players.set(
       pipeInto(
@@ -65,7 +65,7 @@
         const { updatedExchange, bothAgreed } =
           Exchange.setFirstAgreed(exchange, newAgreed)
         exchange = updatedExchange
-        if (bothAgreed) { back() }
+        if (bothAgreed) { commit() }
       }}
     />
   </div>
@@ -92,7 +92,7 @@
         const { updatedExchange, bothAgreed } =
           Exchange.setSecondAgreed(exchange, newAgreed)
         exchange = updatedExchange
-        if (bothAgreed) { back() }
+        if (bothAgreed) { commit() }
       }}
     />
   </div>
