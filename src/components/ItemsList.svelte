@@ -3,11 +3,12 @@
 
   export let title
   export let items: any[]
+  export let sizeMin = false
   export let onClick: ((itemIndex: number) => void)
 </script>
 
 <div class={concat([
-  "size-full",
+  sizeMin ? "" : "size-full",
   "overflow-y-auto",
   "flex",
   "flex-col",
