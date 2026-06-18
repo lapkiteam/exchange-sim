@@ -1,4 +1,5 @@
 import update from "immutability-helper"
+import { pipeInto } from "ts-functional-pipe"
 
 import { type Item } from "./item"
 import { type Player } from "./player"
@@ -24,7 +25,7 @@ export namespace ExchangeParticipant {
     })
   }
 
-  export function disagreed(
+  export function disagree(
     participant: ExchangeParticipant,
   ): ExchangeParticipant {
     return setAgreed(participant, false)
@@ -52,25 +53,42 @@ export namespace Exchange {
     }
   }
 
+  export function disagree(exchange: Exchange): Exchange {
+    return pipeInto(
+      exchange,
+      exchange => update(exchange, {
+        FirstParticipant: {
+          $apply: ExchangeParticipant.disagree
+        }
+      }),
+      exchange => update(exchange, {
+        SecondParticipant: {
+          $apply: ExchangeParticipant.disagree
+        }
+      })
+    )
+  }
+
   export function setFirst(
     exchange: Exchange,
     newOffer: Offer,
     newInventory: Inventory,
   ): Exchange {
     // todo: не обновлять, если новое предложение равно старому
-    return update(exchange, {
-      FirstParticipant: {
-        Offer: {
-          $set: newOffer,
-        },
-        Inventory: {
-          $set: newInventory,
-        },
-      },
-      SecondParticipant: {
-        $apply: ExchangeParticipant.disagreed
-      }
-    })
+    return pipeInto(
+      exchange,
+      exchange => update(exchange, {
+        FirstParticipant: {
+          Offer: {
+            $set: newOffer,
+          },
+          Inventory: {
+            $set: newInventory,
+          },
+        }
+      }),
+      disagree,
+    )
   }
 
   export function setFirstAgreed(
@@ -96,19 +114,20 @@ export namespace Exchange {
     newInventory: Inventory,
   ): Exchange {
     // todo: не обновлять, если новое предложение равно старому
-    return update(exchange, {
-      FirstParticipant: {
-        $apply: ExchangeParticipant.disagreed
-      },
-      SecondParticipant: {
-        Offer: {
-          $set: newOffer,
-        },
-        Inventory: {
-          $set: newInventory,
-        },
-      }
-    })
+    return pipeInto(
+      exchange,
+      exchange => update(exchange, {
+        SecondParticipant: {
+          Offer: {
+            $set: newOffer,
+          },
+          Inventory: {
+            $set: newInventory,
+          },
+        }
+      }),
+      disagree,
+    )
   }
 
   export function setSecondAgreed(

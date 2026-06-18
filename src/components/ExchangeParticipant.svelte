@@ -6,6 +6,7 @@
   import ItemView from "./Item.svelte"
 
   export let inventory: Inventory
+  export let agreed = false
   export let update: (
     offeredItems: Item[],
     undatedInventory: Inventory,
@@ -27,13 +28,12 @@
     if (!offeredItem) { return }
     inventory = Inventory.pushItem(inventory, offeredItem)
     offeredItems = Inventory.removeItem(offeredItems, itemIndex)
+    update(offeredItems, inventory)
   }
 
-  let agreedState = false
-
   function toggleAgreedState() {
-    agreedState = !agreedState
-    setAgreed(agreedState)
+    agreed = !agreed
+    setAgreed(agreed)
   }
 </script>
 
@@ -73,7 +73,7 @@
   ])}>
     <button
       class={concat([
-        agreedState ? "bg-green-500" : "bg-gray-500",
+        agreed ? "bg-green-500" : "bg-gray-500",
         "p-2",
         "size-fit",
       ])}

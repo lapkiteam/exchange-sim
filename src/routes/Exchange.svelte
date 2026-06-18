@@ -66,6 +66,7 @@
           Exchange.setFirst(exchange, offeredItems, updatedInventory)
         )
       }}
+      agreed={exchange.FirstParticipant.Agreed}
       setAgreed={newAgreed => {
         const { updatedExchange, bothAgreed } =
           Exchange.setFirstAgreed(exchange, newAgreed)
@@ -93,6 +94,7 @@
           Exchange.setSecond(exchange, offeredItems, updatedInventory)
         )
       }}
+      agreed={exchange.SecondParticipant.Agreed}
       setAgreed={newAgreed => {
         const { updatedExchange, bothAgreed } =
           Exchange.setSecondAgreed(exchange, newAgreed)
