@@ -1,10 +1,15 @@
 <script lang="ts">
   import { concat } from "../lib/utils"
+  import { type Item } from "../lib/item"
   import { Inventory } from "../lib/inventory"
   import ItemsList from "./ItemsList.svelte"
 
   export let inventory: Inventory
-  export let setAgreed: (newAgreed: boolean) => void
+  export let update: (
+    offeredItems: Item[],
+    undatedInventory: Inventory,
+  ) => void
+  export let setAgreed: (agreed: boolean) => void
 
   let offeredItems: Inventory = []
 
@@ -13,6 +18,7 @@
     if (!newOfferedItem) { return }
     inventory = Inventory.removeItem(inventory, itemIndex)
     offeredItems = Inventory.pushItem(offeredItems, newOfferedItem)
+    update(offeredItems, inventory)
   }
 
   function disofferItem(itemIndex: number) {

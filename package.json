@@ -26,6 +26,7 @@
   "dependencies": {
     "@fering-org/functional-helper": "^0.6.1",
     "immutability-helper": "^3.1.1",
-    "svelte-spa-router": "^4.0.2"
+    "svelte-spa-router": "^4.0.2",
+    "ts-functional-pipe": "^3.1.2"
   }
 }
