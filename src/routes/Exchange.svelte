@@ -6,7 +6,7 @@
   import { Player, type PlayerId } from "../lib/player"
   import { Exchange } from "../lib/exchange"
   import { Players, players } from "../stores/players.svelte"
-  import PlayerWindow from "../components/PlayerWindow.svelte"
+  import PlayerWindow from "../components/ExchangeParticipant.svelte"
 
   export let params: {
     firstPlayerId: PlayerId
