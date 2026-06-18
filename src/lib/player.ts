@@ -20,4 +20,15 @@ export namespace Player {
       }
     })
   }
+
+  export function updateInventory(
+    player: Player,
+    updating: (inventory: Inventory) => Inventory,
+  ): Player {
+    return update(player, {
+      inventory: {
+        $apply: updating
+      }
+    })
+  }
 }
