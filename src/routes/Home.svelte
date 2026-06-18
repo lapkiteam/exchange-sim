@@ -16,7 +16,7 @@
       "p-2",
     ])}
     on:click={() => {
-      push("/exchange")
+      push("/exchange/firstPlayer/secondPlayer")
     }}
   >
     Начать обмен

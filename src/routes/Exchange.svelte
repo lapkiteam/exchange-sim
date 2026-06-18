@@ -3,13 +3,18 @@
   import { pipeInto } from "ts-functional-pipe"
 
   import { concat } from "../lib/utils"
-  import { Player } from "../lib/player"
+  import { Player, type PlayerId } from "../lib/player"
   import { Exchange } from "../lib/exchange"
   import { Players, players } from "../stores/players.svelte"
   import PlayerWindow from "../components/PlayerWindow.svelte"
 
-  const firstPlayer: Player = $players.get("firstPlayer") as Player
-  const secondPlayer: Player = $players.get("secondPlayer") as Player
+  export let params: {
+    firstPlayerId: PlayerId
+    secondPlayerId: PlayerId
+  }
+
+  const firstPlayer: Player = $players.get(params.firstPlayerId) as Player
+  const secondPlayer: Player = $players.get(params.secondPlayerId) as Player
 
   let exchange: Exchange = Exchange.create(
     firstPlayer, secondPlayer

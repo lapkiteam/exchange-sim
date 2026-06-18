@@ -8,7 +8,7 @@
 
   const routes: RouteDefinition = {
     "/": Home,
-    "/exchange": Exchange,
+    "/exchange/:firstPlayerId/:secondPlayerId": Exchange,
   }
 </script>
 
