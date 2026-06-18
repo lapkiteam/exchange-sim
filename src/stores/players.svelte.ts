@@ -44,16 +44,19 @@ export const players = (() => {
   const players: Players = new Map([
     {
       id: currentPlayerId,
+      name: "Ты",
       inventory: [],
     },
     {
       id: "secondPlayer",
+      name: "Второй",
       inventory: [
         ...items,
       ],
     },
     {
       id: "adalinda",
+      name: "Адалинда",
       inventory: [
         ...items,
       ]
