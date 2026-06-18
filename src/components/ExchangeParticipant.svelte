@@ -28,6 +28,7 @@
     if (!offeredItem) { return }
     inventory = Inventory.pushItem(inventory, offeredItem)
     offeredItems = Inventory.removeItem(offeredItems, itemIndex)
+    update(offeredItems, inventory)
   }
 
   function toggleAgreedState() {
