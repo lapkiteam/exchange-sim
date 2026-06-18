@@ -22,7 +22,7 @@
     if (!newOfferedItem) { return }
     inventory = Inventory.removeItem(inventory, itemIndex)
     offeredItems = Inventory.pushItem(offeredItems, newOfferedItem)
-    update(inventory, offeredItems)
+    update(offeredItems, inventory)
   }
 
   function disofferItem(itemIndex: number) {
