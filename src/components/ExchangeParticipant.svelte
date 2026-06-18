@@ -7,6 +7,7 @@
 
   export let inventory: Inventory
   export let agreed = false
+  export let name: string | undefined = undefined
   export let update: (
     offeredItems: Item[],
     undatedInventory: Inventory,
@@ -41,9 +42,15 @@
   "flex",
   "flex-col",
   "size-full",
-  "gap-3",
+  "gap-1",
   "overflow-y-auto",
 ])}>
+  {#if name}
+    <h1 class={concat([
+      "text-2xl",
+      "text-center",
+    ])}>{name}</h1>
+  {/if}
   <div class={concat([
     "flex",
     "size-full",

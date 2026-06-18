@@ -60,6 +60,7 @@
     "size-full",
   ])}>
     <PlayerWindow
+      name={firstPlayer.name}
       inventory={firstPlayer.inventory}
       update={(offeredItems, updatedInventory) => {
         updateExchange(exchange =>
@@ -88,6 +89,7 @@
     "size-full",
   ])}>
     <PlayerWindow
+      name={secondPlayer.name}
       inventory={secondPlayer.inventory}
       update={(offeredItems, updatedInventory) => {
         updateExchange(exchange =>
