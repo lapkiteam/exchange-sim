@@ -26,13 +26,19 @@
 
   ]
 
-  const firstPlayer: Player = [
-    ...items,
-    ...items,
-  ]
-  const secondPlayer: Player = [
-    ...items,
-  ]
+  const firstPlayer: Player = {
+    id: "firstPlayer",
+    inventory: [
+      ...items,
+      ...items,
+    ],
+  }
+  const secondPlayer: Player = {
+    id: "secondPlayer",
+    inventory: [
+      ...items,
+    ],
+  }
 
   let exchange: Exchange = Exchange.create(
     firstPlayer, secondPlayer)
@@ -53,7 +59,7 @@
     "size-full",
   ])}>
     <PlayerWindow
-      inventory={firstPlayer}
+      inventory={firstPlayer.inventory}
       setAgreed={newAgreed => {
         const { updatedExchange, bothAgreed } =
           Exchange.setFirstAgreed(exchange, newAgreed)
@@ -75,7 +81,7 @@
     "size-full",
   ])}>
     <PlayerWindow
-      inventory={secondPlayer}
+      inventory={secondPlayer.inventory}
       setAgreed={newAgreed => {
         const { updatedExchange, bothAgreed } =
           Exchange.setSecondAgreed(exchange, newAgreed)
