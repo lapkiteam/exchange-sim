@@ -1,5 +1,16 @@
 #!/usr/bin/env -S dotnet fsi
+#r "nuget: FSharpMyExt, 2.0.0-prerelease.11"
 open System.IO
+open FsharpMyExtension
+
+[<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
+[<RequireQualifiedAccess>]
+module ImageMagikApi =
+    let convert sourcePath outputPath =
+        Proc.startProcSimple "magick" (String.concat " " [
+            $"\"%s{sourcePath}\""
+            $"\"%s{outputPath}\""
+        ])
 
 type Image = {
     Png: FileInfo Option
@@ -49,10 +60,23 @@ module Images =
         )
         |> List.ofSeq
 
-    // удалить, если есть `.clip`
+    let move destinationDir (images: Images) =
+        // todo: удалить png, если есть `.clip`
+        images
+        |> Seq.iter (fun image ->
+            image.Png
+            |> Option.iter (fun file ->
+                let dstFileName = Path.ChangeExtension(file.Name, "webp")
+                let dstPath = Path.Combine(destinationDir, dstFileName)
+                printfn $"convert {file.FullName} {dstPath}"
+                ImageMagikApi.convert file.FullName dstPath
+                |> ignore
+            )
+        )
 
 let imageSourcesDir = "src/items"
 let imageDestinationDir = "public/items"
 
-Images.fromDir imageSourcesDir |> printfn "%A"
-
+Images.fromDir imageSourcesDir
+|> Images.move imageDestinationDir
+|> printfn "%A"
