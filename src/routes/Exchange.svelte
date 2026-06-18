@@ -3,9 +3,10 @@
 
   import { concat } from "../lib/utils"
   import type { Item } from "../lib/item"
-  import type { Player } from "../lib/player"
+  import { Player } from "../lib/player"
   import { Exchange } from "../lib/exchange"
   import PlayerWindow from "../components/PlayerWindow.svelte"
+  import { Inventory } from "../lib/inventory"
 
   const items: Item[] = [
     {
@@ -33,11 +34,22 @@
       ...items,
     ],
   }
+
+  let finalFirstPlayer = firstPlayer
+  function updateFirstPlayer(updating: (player: Player) => Player) {
+    finalFirstPlayer = updating(firstPlayer)
+  }
+
   const secondPlayer: Player = {
     id: "secondPlayer",
     inventory: [
       ...items,
     ],
+  }
+
+  let finalSecondPlayer = secondPlayer
+  function updateSecondPlayer(updating: (player: Player) => Player) {
+    finalSecondPlayer = updating(secondPlayer)
   }
 
   let exchange: Exchange = Exchange.create(
@@ -60,11 +72,27 @@
   ])}>
     <PlayerWindow
       inventory={firstPlayer.inventory}
-      setAgreed={newAgreed => {
+      agree={(offeredItems, updatedInventory) => {
         const { updatedExchange, bothAgreed } =
-          Exchange.setFirstAgreed(exchange, newAgreed)
+          Exchange.setFirstAgreed(exchange, true)
         exchange = updatedExchange
+
+        updateFirstPlayer(player =>
+          Player.setInventory(player, updatedInventory)
+        )
+        updateSecondPlayer(player =>
+          Player.updateInventory(
+            player,
+            inventory => Inventory.pushItems(inventory, offeredItems),
+          )
+        )
+
         if (bothAgreed) { back() }
+      }}
+      disagree={() => {
+        const { updatedExchange } =
+          Exchange.setFirstAgreed(exchange, false)
+        exchange = updatedExchange
       }}
     />
   </div>
@@ -82,11 +110,27 @@
   ])}>
     <PlayerWindow
       inventory={secondPlayer.inventory}
-      setAgreed={newAgreed => {
+      agree={(offeredItems, updatedInventory) => {
         const { updatedExchange, bothAgreed } =
-          Exchange.setSecondAgreed(exchange, newAgreed)
+          Exchange.setSecondAgreed(exchange, true)
         exchange = updatedExchange
+
+        updateSecondPlayer(player =>
+          Player.setInventory(player, updatedInventory)
+        )
+        updateFirstPlayer(player =>
+          Player.updateInventory(
+            player,
+            inventory => Inventory.pushItems(inventory, offeredItems),
+          )
+        )
+
         if (bothAgreed) { back() }
+      }}
+      disagree={() => {
+        const { updatedExchange } =
+          Exchange.setSecondAgreed(exchange, false)
+        exchange = updatedExchange
       }}
     />
   </div>

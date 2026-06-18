@@ -1,10 +1,15 @@
 <script lang="ts">
   import { concat } from "../lib/utils"
+  import { type Item } from "../lib/item"
   import { Inventory } from "../lib/inventory"
   import ItemsList from "./ItemsList.svelte"
 
   export let inventory: Inventory
-  export let setAgreed: (newAgreed: boolean) => void
+  export let agree: (
+    offeredItems: Item[],
+    undatedInventory: Inventory,
+  ) => void
+  export let disagree: () => void
 
   let offeredItems: Inventory = []
 
@@ -26,7 +31,11 @@
 
   function toggleAgreedState() {
     agreedState = !agreedState
-    setAgreed(agreedState)
+    if (agreedState) {
+      agree(offeredItems, inventory)
+    } else {
+      disagree()
+    }
   }
 </script>
 
