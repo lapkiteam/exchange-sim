@@ -61,17 +61,27 @@ module Images =
         |> List.ofSeq
 
     let move destinationDir (images: Images) =
-        // todo: удалить png, если есть `.clip`
-        images
-        |> Seq.iter (fun image ->
+        let removePngIfHasClip (image: Image) =
+            match image with
+            | { Clip = Some _; Png = Some pngFile } ->
+                printfn $"Delete %s{pngFile.FullName}"
+                File.Delete pngFile.FullName
+            | _ -> ()
+
+        let convertPngAndMove (image: Image) =
             image.Png
             |> Option.iter (fun file ->
                 let dstFileName = Path.ChangeExtension(file.Name, "webp")
                 let dstPath = Path.Combine(destinationDir, dstFileName)
-                printfn $"convert {file.FullName} {dstPath}"
+                printfn $"Convert %s{file.FullName} to %s{dstPath}"
                 ImageMagikApi.convert file.FullName dstPath
                 |> ignore
             )
+
+        images
+        |> Seq.iter (fun image ->
+            convertPngAndMove image
+            removePngIfHasClip image
         )
 
 let imageSourcesDir = "src/items"
