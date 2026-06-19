@@ -76,7 +76,10 @@ export const players = (() => {
         },
         {
           name: "Нимб",
-          image: undefined,
+          image: {
+            src: "items/halo.webp",
+            alt: "halo",
+          },
         },
         {
           name: "Отпечаток лапки",
