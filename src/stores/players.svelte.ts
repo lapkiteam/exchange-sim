@@ -156,7 +156,7 @@ export const players = (() => {
           },
         },
         {
-          name: "Одежда-волшебницы",
+          name: "Одежда волшебницы",
           image: {
             src: "items/wizzard-cloth.webp",
             alt: "wizzard-cloth",
