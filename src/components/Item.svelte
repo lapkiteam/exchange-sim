@@ -13,6 +13,7 @@
   {#if item.image}
     <img
       class={concat([
+        "shrink-0",
         "size-8",
         "object-contain",
       ])}
