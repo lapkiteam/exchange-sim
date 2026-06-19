@@ -50,7 +50,10 @@ export const players = (() => {
         },
         {
           name: "Кисточка",
-          image: undefined,
+          image: {
+            src: "items/brush.webp",
+            alt: "brush",
+          },
         },
       ],
     },
