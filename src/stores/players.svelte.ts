@@ -46,7 +46,10 @@ export const players = (() => {
         },
         {
           name: "Шнур от компьютера",
-          image: undefined,
+          image: {
+            src: "items/cable.webp",
+            alt: "cable",
+          },
         },
         {
           name: "Кисточка",
