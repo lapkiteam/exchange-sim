@@ -69,7 +69,10 @@ export const players = (() => {
       inventory: [
         {
           name: "Перо",
-          image: undefined,
+          image: {
+            src: "items/feather.webp",
+            alt: "feather",
+          },
         },
         {
           name: "Нимб",
