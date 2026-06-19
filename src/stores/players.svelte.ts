@@ -128,7 +128,10 @@ export const players = (() => {
         },
         {
           name: "Сережка",
-          image: undefined,
+          image: {
+            src: "items/earring.webp",
+            alt: "earring",
+          },
         },
         {
           name: "Виар",
