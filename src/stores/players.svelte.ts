@@ -34,23 +34,38 @@ export const players = (() => {
       inventory: [
         {
           name: "Шляпа",
-          image: undefined,
+          image: {
+            src: "items/hat.webp",
+            alt: "hat",
+          },
         },
         {
           name: "Плащ",
-          image: undefined,
+          image: {
+            src: "items/raincoat.webp",
+            alt: "raincoat",
+          },
         },
         {
           name: "Циркулярка",
-          image: undefined,
+          image: {
+            src: "items/circular-saw.webp",
+            alt: "circular-saw",
+          },
         },
         {
           name: "Шнур от компьютера",
-          image: undefined,
+          image: {
+            src: "items/cable.webp",
+            alt: "cable",
+          },
         },
         {
           name: "Кисточка",
-          image: undefined,
+          image: {
+            src: "items/brush.webp",
+            alt: "brush",
+          },
         },
       ],
     },
@@ -60,19 +75,31 @@ export const players = (() => {
       inventory: [
         {
           name: "Перо",
-          image: undefined,
+          image: {
+            src: "items/feather.webp",
+            alt: "feather",
+          },
         },
         {
           name: "Нимб",
-          image: undefined,
+          image: {
+            src: "items/halo.webp",
+            alt: "halo",
+          },
         },
         {
           name: "Отпечаток лапки",
-          image: undefined,
+          image: {
+            src: "items/paw.webp",
+            alt: "paw",
+          },
         },
         {
           name: "Кусь",
-          image: undefined,
+          image: {
+            src: "items/bite.webp",
+            alt: "bite",
+          },
         },
       ]
     },
@@ -82,15 +109,24 @@ export const players = (() => {
       inventory: [
         {
           name: "Ирокез",
-          image: undefined,
+          image: {
+            src: "items/iroquois.webp",
+            alt: "iroquois",
+          },
         },
         {
           name: "Нашивка с енотом",
-          image: undefined,
+          image: {
+            src: "items/raccoon-patch.webp",
+            alt: "raccoon-patch",
+          },
         },
         {
           name: "Красный галстук",
-          image: undefined,
+          image: {
+            src: "items/red-tie.webp",
+            alt: "red-tie",
+          },
         },
         {
           name: "Микрофон с перегрузом",
@@ -106,24 +142,39 @@ export const players = (() => {
       name: "Туатара",
       inventory: [
         {
-          name: "Шляпа",
-          image: undefined,
+          name: "Волшебная шляпа",
+          image: {
+            src: "items/wizzard-hat.webp",
+            alt: "wizzard-hat",
+          },
         },
         {
           name: "Посох",
-          image: undefined,
+          image: {
+            src: "items/staff.webp",
+            alt: "staff",
+          },
         },
         {
-          name: "Одежда",
-          image: undefined,
+          name: "Одежда-волшебницы",
+          image: {
+            src: "items/wizzard-cloth.webp",
+            alt: "wizzard-cloth",
+          },
         },
         {
           name: "Сережка",
-          image: undefined,
+          image: {
+            src: "items/earring.webp",
+            alt: "earring",
+          },
         },
         {
           name: "Виар",
-          image: undefined,
+          image: {
+            src: "items/vr.webp",
+            alt: "vr",
+          },
         },
       ],
     },
@@ -133,19 +184,31 @@ export const players = (() => {
       inventory: [
         {
           name: "Надкушенная сосиска",
-          image: undefined,
+          image: {
+            src: "items/sausage.webp",
+            alt: "sausage",
+          },
         },
         {
           name: "Бутылка пойла",
-          image: undefined,
+          image: {
+            src: "items/alcohol.webp",
+            alt: "бутылка",
+          },
         },
         {
           name: "Гениальная идея",
-          image: undefined,
+          image: {
+            src: "items/idea.webp",
+            alt: "idea",
+          },
         },
         {
           name: "Золотой гусь",
-          image: undefined,
+          image: {
+            src: "items/golden-goose.webp",
+            alt: "golden-goose",
+          },
         },
       ]
     },
