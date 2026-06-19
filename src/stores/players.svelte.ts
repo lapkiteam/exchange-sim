@@ -137,7 +137,10 @@ export const players = (() => {
         },
         {
           name: "Бутылка пойла",
-          image: undefined,
+          image: {
+            src: "items/alcohol.webp",
+            alt: "бутылка",
+          },
         },
         {
           name: "Гениальная идея",
