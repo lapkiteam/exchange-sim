@@ -163,7 +163,10 @@ export const players = (() => {
         },
         {
           name: "Золотой гусь",
-          image: undefined,
+          image: {
+            src: "items/golden-goose.webp",
+            alt: "golden-goose",
+          },
         },
       ]
     },
