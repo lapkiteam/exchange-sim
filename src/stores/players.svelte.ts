@@ -34,11 +34,17 @@ export const players = (() => {
       inventory: [
         {
           name: "Шляпа",
-          image: undefined,
+          image: {
+            src: "items/hat.webp",
+            alt: "hat",
+          },
         },
         {
           name: "Плащ",
-          image: undefined,
+          image: {
+            src: "items/raincoat.webp",
+            alt: "raincoat",
+          },
         },
         {
           name: "Циркулярка",
@@ -83,11 +89,17 @@ export const players = (() => {
         },
         {
           name: "Отпечаток лапки",
-          image: undefined,
+          image: {
+            src: "items/paw.webp",
+            alt: "paw",
+          },
         },
         {
           name: "Кусь",
-          image: undefined,
+          image: {
+            src: "items/bite.webp",
+            alt: "bite",
+          },
         },
       ]
     },
@@ -97,15 +109,24 @@ export const players = (() => {
       inventory: [
         {
           name: "Ирокез",
-          image: undefined,
+          image: {
+            src: "items/iroquois.webp",
+            alt: "iroquois",
+          },
         },
         {
           name: "Нашивка с енотом",
-          image: undefined,
+          image: {
+            src: "items/raccoon-patch.webp",
+            alt: "raccoon-patch",
+          },
         },
         {
           name: "Красный галстук",
-          image: undefined,
+          image: {
+            src: "items/red-tie.webp",
+            alt: "red-tie",
+          },
         },
         {
           name: "Микрофон с перегрузом",
@@ -121,16 +142,25 @@ export const players = (() => {
       name: "Туатара",
       inventory: [
         {
-          name: "Шляпа",
-          image: undefined,
+          name: "Волшебная шляпа",
+          image: {
+            src: "items/wizzard-hat.webp",
+            alt: "wizzard-hat",
+          },
         },
         {
           name: "Посох",
-          image: undefined,
+          image: {
+            src: "items/staff.webp",
+            alt: "staff",
+          },
         },
         {
-          name: "Одежда",
-          image: undefined,
+          name: "Одежда-волшебницы",
+          image: {
+            src: "items/wizzard-cloth.webp",
+            alt: "wizzard-cloth",
+          },
         },
         {
           name: "Сережка",
@@ -141,7 +171,10 @@ export const players = (() => {
         },
         {
           name: "Виар",
-          image: undefined,
+          image: {
+            src: "items/vr.webp",
+            alt: "vr",
+          },
         },
       ],
     },
@@ -151,7 +184,10 @@ export const players = (() => {
       inventory: [
         {
           name: "Надкушенная сосиска",
-          image: undefined,
+          image: {
+            src: "items/sausage.webp",
+            alt: "sausage",
+          },
         },
         {
           name: "Бутылка пойла",
@@ -162,7 +198,10 @@ export const players = (() => {
         },
         {
           name: "Гениальная идея",
-          image: undefined,
+          image: {
+            src: "items/idea.webp",
+            alt: "idea",
+          },
         },
         {
           name: "Золотой гусь",
