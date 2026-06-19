@@ -20,5 +20,7 @@
       alt={item.image.alt}
     />
   {/if}
-  <div>{item.name}</div>
+  <div class={concat([
+    "text-left"
+  ])}>{item.name}</div>
 </div>
