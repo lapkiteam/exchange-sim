@@ -42,7 +42,10 @@ export const players = (() => {
         },
         {
           name: "Циркулярка",
-          image: undefined,
+          image: {
+            src: "items/circular-saw.webp",
+            alt: "circular-saw",
+          },
         },
         {
           name: "Шнур от компьютера",
